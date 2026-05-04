@@ -10,18 +10,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --pumpkin:   #c85f18;
-      --amber:     #e09a38;
-      --amber-lt:  #f0c878;
-      --cream:     #f7ede0;
-      --sand:      #efe0c8;
-      --bark:      #2a1a0a;
-      --bark-md:   #4a2e14;
-      --moss:      #4a5e38;
-      --moss-lt:   #8aac78;
-      --rust:      #a84010;
-      --muted:     #7a5a3a;
-      --border:    #d8c8a8;
+      --pumpkin:  #c85f18;
+      --amber:    #e09a38;
+      --amber-lt: #f0c878;
+      --cream:    #f7ede0;
+      --sand:     #efe0c8;
+      --bark:     #2a1a0a;
+      --bark-md:  #4a2e14;
+      --moss:     #4a5e38;
+      --rust:     #a84010;
+      --muted:    #7a5a3a;
+      --border:   #d8c8a8;
     }
 
     html { scroll-behavior: smooth; }
@@ -33,6 +32,50 @@
       font-weight: 300;
       line-height: 1.75;
       font-size: 16px;
+    }
+
+    /* ── LANGUAGE SWITCHER ─────────────────── */
+    .lang-switcher {
+      position: fixed;
+      top: 1rem;
+      right: 1.2rem;
+      z-index: 999;
+      display: flex;
+      background: rgba(247,237,224,.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 3px;
+      gap: 2px;
+      box-shadow: 0 2px 12px rgba(42,26,10,.12);
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Raleway', sans-serif;
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      padding: .35rem .85rem;
+      border-radius: 24px;
+      color: var(--muted);
+      transition: background .25s, color .25s;
+    }
+
+    .lang-btn.active {
+      background: var(--pumpkin);
+      color: #fff;
+    }
+
+    /* text swap transition */
+    .t {
+      transition: opacity .2s ease;
+    }
+
+    body.switching .t {
+      opacity: 0;
     }
 
     /* ── HERO ──────────────────────────────── */
@@ -51,8 +94,7 @@
 
     .hero::after {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background:
         radial-gradient(ellipse 70% 45% at 10% 90%, rgba(200,95,24,.18) 0%, transparent 65%),
         radial-gradient(ellipse 60% 40% at 90% 10%, rgba(74,94,56,.14) 0%, transparent 65%),
@@ -63,23 +105,17 @@
     .hero > * { position: relative; z-index: 1; }
 
     .hero-leaves-top {
-      position: absolute;
-      top: 0; left: 50%;
+      position: absolute; top: 0; left: 50%;
       transform: translateX(-50%);
       width: min(600px, 100%);
-      opacity: .85;
-      pointer-events: none;
-      z-index: 0;
+      opacity: .85; pointer-events: none; z-index: 0;
     }
 
     .hero-leaves-bottom {
-      position: absolute;
-      bottom: 0; left: 50%;
+      position: absolute; bottom: 0; left: 50%;
       transform: translateX(-50%);
       width: min(700px, 100%);
-      opacity: .75;
-      pointer-events: none;
-      z-index: 0;
+      opacity: .75; pointer-events: none; z-index: 0;
     }
 
     .hero-eyebrow {
@@ -102,46 +138,30 @@
 
     .hero-amp { color: var(--pumpkin); font-style: normal; }
 
-    .hero-pumpkin-row {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      margin: 1.8rem 0;
-      width: 100%;
-      max-width: 380px;
+    .hero-divider-row {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin: 1.8rem 0; width: 100%; max-width: 380px;
     }
 
     .hero-rule {
-      flex: 1;
-      height: 1px;
+      flex: 1; height: 1px;
       background: linear-gradient(90deg, transparent, var(--amber-lt), transparent);
     }
 
     .hero-date {
       font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      letter-spacing: .12em;
-      color: var(--bark-md);
+      font-size: 1.05rem; letter-spacing: .12em; color: var(--bark-md);
     }
 
     .hero-tagline {
-      font-size: .95rem;
-      color: var(--muted);
-      max-width: 400px;
-      line-height: 1.85;
-      margin-top: .6rem;
+      font-size: .95rem; color: var(--muted);
+      max-width: 400px; line-height: 1.85; margin-top: .6rem;
     }
 
     .scroll-hint {
-      margin-top: 3rem;
-      color: var(--amber);
-      font-size: .65rem;
-      letter-spacing: .25em;
-      text-transform: uppercase;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: .5rem;
+      margin-top: 3rem; color: var(--amber);
+      font-size: .65rem; letter-spacing: .25em; text-transform: uppercase;
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
       animation: bob 2.5s ease-in-out infinite;
     }
 
@@ -149,114 +169,69 @@
 
     /* ── NAV ───────────────────────────────── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 200;
+      position: sticky; top: 0; z-index: 200;
       background: rgba(247,237,224,.93);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: .3rem 2rem;
-      padding: .85rem 1.5rem;
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: .3rem 2rem; padding: .85rem 1.5rem;
     }
 
     nav a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: .7rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      font-weight: 500;
-      transition: color .25s;
+      text-decoration: none; color: var(--muted);
+      font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+      font-weight: 500; transition: color .25s;
     }
 
     nav a:hover { color: var(--pumpkin); }
 
     /* ── SECTION ───────────────────────────── */
-    .section {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 6rem 2rem;
-      position: relative;
-    }
+    .section { max-width: 820px; margin: 0 auto; padding: 6rem 2rem; }
 
     .section-tag {
-      font-size: .65rem;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      color: var(--pumpkin);
-      font-weight: 500;
-      margin-bottom: .7rem;
+      font-size: .65rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--pumpkin); font-weight: 500; margin-bottom: .7rem;
     }
 
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      font-size: clamp(2.2rem, 5vw, 3.4rem);
-      line-height: 1.1;
-      margin-bottom: 1.4rem;
+      font-family: 'Playfair Display', serif; font-weight: 400;
+      font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.1; margin-bottom: 1.4rem;
     }
 
     .section-title em { color: var(--pumpkin); font-style: italic; }
 
     .section-lead {
-      color: var(--muted);
-      font-size: .93rem;
-      max-width: 540px;
-      margin-bottom: 3rem;
-      padding-left: 1rem;
-      border-left: 3px solid var(--amber-lt);
+      color: var(--muted); font-size: .93rem; max-width: 540px;
+      margin-bottom: 3rem; padding-left: 1rem; border-left: 3px solid var(--amber-lt);
     }
 
-    /* divider */
     .divider-row {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 0 2rem;
+      display: flex; align-items: center; gap: 1rem;
+      max-width: 820px; margin: 0 auto; padding: 0 2rem;
     }
 
-    .divider-row::before,
-    .divider-row::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
+    .divider-row::before, .divider-row::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
     }
 
     .divider-icon { font-size: 1.2rem; }
 
     /* ── CARDS ─────────────────────────────── */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.4rem;
-    }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.4rem; }
 
     .card {
       background: linear-gradient(145deg, #fdf5e8, var(--sand));
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1.8rem 1.6rem;
-      transition: transform .3s, box-shadow .3s;
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 1.8rem 1.6rem; transition: transform .3s, box-shadow .3s;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(42,26,10,.1);
-    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(42,26,10,.1); }
 
     .card-icon { font-size: 1.5rem; margin-bottom: .9rem; display: block; }
 
     .card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 500;
-      margin-bottom: .55rem;
+      font-family: 'Playfair Display', serif; font-size: 1.15rem;
+      font-weight: 500; margin-bottom: .55rem;
     }
 
     .card p, .card a { font-size: .87rem; color: var(--muted); line-height: 1.75; }
@@ -264,50 +239,14 @@
     .card a:hover { text-decoration: underline; }
 
     /* ── TIMELINE ──────────────────────────── */
-    .tl-row {
-      display: grid;
-      grid-template-columns: 90px 28px 1fr;
-      align-items: stretch;
-      gap: 0 1rem;
-    }
-
-    .tl-time {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: var(--pumpkin);
-      text-align: right;
-      padding-top: .1rem;
-      padding-bottom: 2rem;
-    }
-
+    .tl-row { display: grid; grid-template-columns: 110px 28px 1fr; align-items: stretch; gap: 0 1rem; }
+    .tl-time { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--pumpkin); text-align: right; padding-top: .1rem; padding-bottom: 2rem; }
     .tl-center { display: flex; flex-direction: column; align-items: center; }
-
-    .tl-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      background: var(--amber);
-      border: 2px solid var(--pumpkin);
-      flex-shrink: 0;
-      margin-top: .25rem;
-    }
-
-    .tl-stem {
-      flex: 1; width: 1px;
-      background: linear-gradient(var(--amber-lt), var(--border));
-      margin: 4px 0;
-    }
-
+    .tl-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--amber); border: 2px solid var(--pumpkin); flex-shrink: 0; margin-top: .25rem; }
+    .tl-stem { flex: 1; width: 1px; background: linear-gradient(var(--amber-lt), var(--border)); margin: 4px 0; }
     .tl-row:last-child .tl-stem { display: none; }
-
     .tl-body { padding-bottom: 2rem; }
-
-    .tl-body h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 500;
-      margin-bottom: .25rem;
-    }
-
+    .tl-body h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 500; margin-bottom: .25rem; }
     .tl-body p { font-size: .87rem; color: var(--muted); }
 
     /* ── FAQ ───────────────────────────────── */
@@ -315,67 +254,37 @@
     details:first-of-type { border-top: 1px solid var(--border); }
 
     summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 1.2rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--bark);
-      user-select: none;
+      list-style: none; cursor: pointer; padding: 1.2rem 0;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem; font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: var(--bark); user-select: none;
     }
 
     summary::-webkit-details-marker { display: none; }
 
     .faq-plus {
-      flex-shrink: 0;
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--sand);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      line-height: 1;
-      color: var(--pumpkin);
+      flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+      border: 1px solid var(--border); background: var(--sand);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; line-height: 1; color: var(--pumpkin);
       transition: transform .35s, background .3s;
     }
 
-    details[open] .faq-plus {
-      transform: rotate(45deg);
-      background: var(--pumpkin);
-      border-color: var(--pumpkin);
-      color: #fff;
-    }
+    details[open] .faq-plus { transform: rotate(45deg); background: var(--pumpkin); border-color: var(--pumpkin); color: #fff; }
 
-    .faq-body {
-      padding: .2rem 0 1.4rem;
-      font-size: .9rem;
-      color: var(--muted);
-      max-width: 640px;
-      line-height: 1.85;
-    }
-
+    .faq-body { padding: .2rem 0 1.4rem; font-size: .9rem; color: var(--muted); max-width: 640px; line-height: 1.85; }
     .faq-body a { color: var(--pumpkin); }
     .faq-body strong { font-weight: 500; color: var(--bark-md); }
 
     /* ── RSVP ──────────────────────────────── */
     .rsvp-box {
       background: linear-gradient(135deg, var(--bark) 0%, var(--bark-md) 100%);
-      border-radius: 8px;
-      padding: 4rem 3rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      border-radius: 8px; padding: 4rem 3rem; text-align: center;
+      position: relative; overflow: hidden;
     }
 
     .rsvp-box::before {
-      content: '';
-      position: absolute; inset: 0;
+      content: ''; position: absolute; inset: 0;
       background:
         radial-gradient(ellipse 60% 60% at 10% 100%, rgba(200,95,24,.28) 0%, transparent 60%),
         radial-gradient(ellipse 50% 50% at 90% 0%, rgba(224,154,56,.22) 0%, transparent 60%);
@@ -388,51 +297,42 @@
     .rsvp-box p { color: rgba(253,245,232,.65); font-size: .92rem; max-width: 420px; margin: 0 auto 2rem; }
 
     .btn {
-      display: inline-block;
-      padding: .9rem 2.6rem;
-      background: var(--pumpkin);
-      color: #fff;
-      text-decoration: none;
-      font-size: .75rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      font-weight: 500;
-      border-radius: 3px;
-      transition: background .3s, transform .2s;
+      display: inline-block; padding: .9rem 2.6rem; background: var(--pumpkin);
+      color: #fff; text-decoration: none; font-size: .75rem;
+      letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
+      border-radius: 3px; transition: background .3s, transform .2s;
     }
 
     .btn:hover { background: var(--rust); transform: translateY(-2px); }
 
     /* ── FOOTER ────────────────────────────── */
     footer {
-      text-align: center;
-      padding: 2.5rem 2rem;
-      font-size: .78rem;
-      color: var(--muted);
-      letter-spacing: .1em;
-      border-top: 1px solid var(--border);
-      background: var(--sand);
+      text-align: center; padding: 2.5rem 2rem;
+      font-size: .78rem; color: var(--muted); letter-spacing: .1em;
+      border-top: 1px solid var(--border); background: var(--sand);
     }
 
     /* ── REVEAL ────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .65s ease, transform .65s ease;
-    }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
     @media (max-width: 600px) {
-      .tl-row { grid-template-columns: 62px 20px 1fr; }
+      .tl-row { grid-template-columns: 72px 20px 1fr; }
       .rsvp-box { padding: 2.5rem 1.5rem; }
+      .lang-switcher { top: .6rem; right: .6rem; }
     }
   </style>
 </head>
 <body>
 
+<!-- ── LANGUAGE SWITCHER ──────────────────────────────── -->
+<div class="lang-switcher" role="group" aria-label="Language">
+  <button class="lang-btn active" id="btn-da" onclick="setLang('da')">DA</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
 <!-- ── HERO ──────────────────────────────────────────── -->
 <section class="hero">
-
   <svg class="hero-leaves-top" viewBox="0 0 600 120" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M300 15 C290 5,275 8,278 20 C270 12,260 18,268 28 C258 24,252 32,262 38 C252 38,250 48,260 50 L300 15Z" fill="#c85f18" opacity=".7"/>
     <path d="M300 15 C310 5,325 8,322 20 C330 12,340 18,332 28 C342 24,348 32,338 38 C348 38,350 48,340 50 L300 15Z" fill="#e09a38" opacity=".65"/>
@@ -453,7 +353,9 @@
     <rect x="517" y="62" width="6" height="5" rx="1" fill="#4a2e14" opacity=".5"/>
   </svg>
 
-  <p class="hero-eyebrow">Vi fejrer vores bryllup</p>
+  <p class="hero-eyebrow t"
+     data-da="Vi fejrer vores bryllup"
+     data-en="We're getting married"></p>
 
   <h1 class="hero-names">
     Nichlas<br/>
@@ -461,25 +363,22 @@
     Malene
   </h1>
 
-  <div class="hero-pumpkin-row">
+  <div class="hero-divider-row">
     <div class="hero-rule"></div>
-    <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 8 C16 8 14 4 16 3 C18 4 16 8 16 8Z" fill="#4a5e38"/>
-      <ellipse cx="16" cy="20" rx="9" ry="8" fill="#d4651a"/>
-      <ellipse cx="16" cy="20" rx="6" ry="8" fill="#c85f18"/>
-      <line x1="16" y1="12" x2="16" y2="28" stroke="#a84010" stroke-width="1" opacity=".5"/>
-      <line x1="10" y1="14" x2="12" y2="27" stroke="#a84010" stroke-width=".7" opacity=".4"/>
-      <line x1="22" y1="14" x2="20" y2="27" stroke="#a84010" stroke-width=".7" opacity=".4"/>
-      <path d="M7 20 Q16 28 25 20" stroke="#a84010" stroke-width="1" fill="none"/>
-    </svg>
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><path d="M16 8C16 8 14 4 16 3C18 4 16 8 16 8Z" fill="#4a5e38"/><ellipse cx="16" cy="20" rx="9" ry="8" fill="#d4651a"/><ellipse cx="16" cy="20" rx="6" ry="8" fill="#c85f18"/><line x1="16" y1="12" x2="16" y2="28" stroke="#a84010" stroke-width="1" opacity=".5"/><line x1="10" y1="14" x2="12" y2="27" stroke="#a84010" stroke-width=".7" opacity=".4"/><line x1="22" y1="14" x2="20" y2="27" stroke="#a84010" stroke-width=".7" opacity=".4"/><path d="M7 20 Q16 28 25 20" stroke="#a84010" stroke-width="1" fill="none"/></svg>
     <div class="hero-rule"></div>
   </div>
 
-  <p class="hero-date">Lørdag den 10. oktober 2026</p>
-  <p class="hero-tagline">Vi glæder os til at fejre kærligheden sammen med jer 🍂</p>
+  <p class="hero-date t"
+     data-da="Lørdag den 10. oktober 2026"
+     data-en="Saturday, 10th October 2026"></p>
+
+  <p class="hero-tagline t"
+     data-da="Vi glæder os til at fejre kærligheden sammen med jer 🍂"
+     data-en="We can't wait to celebrate love together with you 🍂"></p>
 
   <div class="scroll-hint">
-    <span>Se mere</span>
+    <span class="t" data-da="Se mere" data-en="Scroll"></span>
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
 
@@ -488,94 +387,112 @@
     <ellipse cx="40" cy="95" rx="28" ry="12" transform="rotate(10 40 95)" fill="#c85f18" opacity=".4"/>
     <ellipse cx="640" cy="85" rx="35" ry="15" transform="rotate(20 640 85)" fill="#4a5e38" opacity=".45"/>
     <ellipse cx="660" cy="95" rx="28" ry="12" transform="rotate(-10 660 95)" fill="#c85f18" opacity=".4"/>
-    <!-- left pumpkin -->
-    <ellipse cx="150" cy="88" rx="28" ry="22" fill="#d4651a"/>
-    <ellipse cx="150" cy="88" rx="19" ry="22" fill="#c85f18"/>
+    <ellipse cx="150" cy="88" rx="28" ry="22" fill="#d4651a"/><ellipse cx="150" cy="88" rx="19" ry="22" fill="#c85f18"/>
     <line x1="150" y1="66" x2="150" y2="84" stroke="#a84010" stroke-width="1.5" opacity=".55"/>
     <line x1="136" y1="70" x2="139" y2="84" stroke="#a84010" stroke-width="1" opacity=".4"/>
     <line x1="164" y1="70" x2="161" y2="84" stroke="#a84010" stroke-width="1" opacity=".4"/>
-    <path d="M150 64 C150 64 148 58 150 56 C152 58 150 64 150 64Z" fill="#4a5e38"/>
-    <!-- center pumpkin -->
-    <ellipse cx="350" cy="90" rx="40" ry="28" fill="#d4651a"/>
-    <ellipse cx="350" cy="90" rx="28" ry="28" fill="#c85f18"/>
+    <path d="M150 64C150 64 148 58 150 56C152 58 150 64 150 64Z" fill="#4a5e38"/>
+    <ellipse cx="350" cy="90" rx="40" ry="28" fill="#d4651a"/><ellipse cx="350" cy="90" rx="28" ry="28" fill="#c85f18"/>
     <line x1="350" y1="62" x2="350" y2="82" stroke="#a84010" stroke-width="2" opacity=".55"/>
     <line x1="330" y1="68" x2="334" y2="83" stroke="#a84010" stroke-width="1.2" opacity=".4"/>
     <line x1="370" y1="68" x2="366" y2="83" stroke="#a84010" stroke-width="1.2" opacity=".4"/>
-    <path d="M350 60 C350 60 347 52 350 50 C353 52 350 60 350 60Z" fill="#4a5e38"/>
-    <!-- right pumpkin -->
-    <ellipse cx="550" cy="88" rx="28" ry="22" fill="#d4651a"/>
-    <ellipse cx="550" cy="88" rx="19" ry="22" fill="#c85f18"/>
+    <path d="M350 60C350 60 347 52 350 50C353 52 350 60 350 60Z" fill="#4a5e38"/>
+    <ellipse cx="550" cy="88" rx="28" ry="22" fill="#d4651a"/><ellipse cx="550" cy="88" rx="19" ry="22" fill="#c85f18"/>
     <line x1="550" y1="66" x2="550" y2="84" stroke="#a84010" stroke-width="1.5" opacity=".55"/>
     <line x1="536" y1="70" x2="539" y2="84" stroke="#a84010" stroke-width="1" opacity=".4"/>
     <line x1="564" y1="70" x2="561" y2="84" stroke="#a84010" stroke-width="1" opacity=".4"/>
-    <path d="M550 64 C550 64 548 58 550 56 C552 58 550 64 550 64Z" fill="#4a5e38"/>
-    <!-- scattered leaves -->
+    <path d="M550 64C550 64 548 58 550 56C552 58 550 64 550 64Z" fill="#4a5e38"/>
     <ellipse cx="230" cy="96" rx="22" ry="10" transform="rotate(15 230 96)" fill="#e09a38" opacity=".5"/>
     <ellipse cx="460" cy="96" rx="22" ry="10" transform="rotate(-15 460 96)" fill="#e09a38" opacity=".5"/>
     <ellipse cx="290" cy="100" rx="18" ry="8" transform="rotate(-10 290 100)" fill="#a84010" opacity=".4"/>
     <ellipse cx="415" cy="100" rx="18" ry="8" transform="rotate(10 415 100)" fill="#a84010" opacity=".4"/>
   </svg>
-
 </section>
 
 <!-- ── NAV ──────────────────────────────────────────────── -->
 <nav>
-  <a href="#praktisk">Praktisk info</a>
-  <a href="#program">Program</a>
+  <a href="#praktisk" class="t" data-da="Praktisk info" data-en="Practical Info"></a>
+  <a href="#program" class="t" data-da="Program" data-en="Schedule"></a>
   <a href="#faq">FAQ</a>
-  <a href="#onskeliste">Ønskeliste</a>
-  <a href="#svar">Svar udbedes</a>
+  <a href="#onskeliste" class="t" data-da="Ønskeliste" data-en="Wish List"></a>
+  <a href="#svar" class="t" data-da="Svar udbedes" data-en="RSVP"></a>
 </nav>
 
-<!-- ── PRAKTISK ─────────────────────────────────────────── -->
+<!-- ── PRAKTISK INFO ─────────────────────────────────────── -->
 <section class="section" id="praktisk">
-  <p class="section-tag reveal">Det praktiske</p>
-  <h2 class="section-title reveal">Alt hvad du <em>skal vide</em></h2>
-  <p class="section-lead reveal">Her finder du alle de praktiske informationer — fra kirken til festen og alt derimellem.</p>
+  <p class="section-tag reveal t" data-da="Det praktiske" data-en="The essentials"></p>
+  <h2 class="section-title reveal">
+    <span class="t" data-da="Alt hvad du " data-en="Everything you "></span><em class="t" data-da="skal vide" data-en="need to know"></em>
+  </h2>
+  <p class="section-lead reveal t"
+     data-da="Her finder du alle de praktiske informationer — fra kirken til festen og alt derimellem."
+     data-en="All the practical details in one place — from the church to the reception and everything in between."></p>
 
   <div class="cards">
 
     <div class="card reveal">
       <span class="card-icon">🍂</span>
-      <h3>Velsignelse</h3>
-      <p><strong style="font-weight:500;">Hvornår:</strong> kl. 14.30</p>
-      <p><strong style="font-weight:500;">Hvor:</strong> Middelfart Kirke<br/>Algade 1, 5500 Middelfart</p>
-      <p style="margin-top:.6rem;"><a href="https://www.google.com/maps/search/Middelfart+Kirke+Algade+1+5500+Middelfart" target="_blank">Åbn i Google Maps →</a></p>
+      <h3 class="t" data-da="Velsignelse" data-en="Ceremony"></h3>
+      <p>
+        <strong style="font-weight:500;" class="t" data-da="Hvornår:" data-en="When:"></strong>
+        <span class="t" data-da=" kl. 14.30" data-en=" 2:30 PM"></span>
+      </p>
+      <p>
+        <strong style="font-weight:500;" class="t" data-da="Hvor:" data-en="Where:"></strong>
+        <span> Middelfart Kirke<br/>Algade 1, 5500 Middelfart</span>
+      </p>
+      <p style="margin-top:.6rem;"><a href="https://www.google.com/maps/search/Middelfart+Kirke+Algade+1+5500+Middelfart" target="_blank" class="t" data-da="Åbn i Google Maps →" data-en="Open in Google Maps →"></a></p>
     </div>
 
     <div class="card reveal">
       <span class="card-icon">🎉</span>
-      <h3>Reception og fest</h3>
-      <p><strong style="font-weight:500;">Hvornår:</strong> Efter vielsen</p>
-      <p><strong style="font-weight:500;">Hvor:</strong> Gamborg Forsamlingshus<br/>Gamborgvej 46, 5500 Middelfart</p>
-      <p style="margin-top:.6rem;"><a href="https://www.google.com/maps/search/Gamborgvej+46+5500+Middelfart" target="_blank">Åbn i Google Maps →</a></p>
+      <h3 class="t" data-da="Reception og fest" data-en="Reception &amp; Dinner"></h3>
+      <p>
+        <strong style="font-weight:500;" class="t" data-da="Hvornår:" data-en="When:"></strong>
+        <span class="t" data-da=" Efter vielsen" data-en=" Directly after the ceremony"></span>
+      </p>
+      <p>
+        <strong style="font-weight:500;" class="t" data-da="Hvor:" data-en="Where:"></strong>
+        <span> Gamborg Forsamlingshus<br/>Gamborgvej 46, 5500 Middelfart</span>
+      </p>
+      <p style="margin-top:.6rem;"><a href="https://www.google.com/maps/search/Gamborgvej+46+5500+Middelfart" target="_blank" class="t" data-da="Åbn i Google Maps →" data-en="Open in Google Maps →"></a></p>
     </div>
 
     <div class="card reveal">
       <span class="card-icon">🎙️</span>
       <h3>Toastmaster</h3>
-      <p>Casper Nielsen koordinerer aftenens festlige indslag.</p>
+      <p class="t"
+         data-da="Casper Nielsen koordinerer aftenens festlige indslag."
+         data-en="Casper Nielsen will be coordinating speeches and entertainment for the evening."></p>
       <p style="margin-top:.5rem;"><a href="mailto:caspernielsen94@gmail.com">caspernielsen94@gmail.com</a></p>
-      <p style="margin-top:.5rem; font-size:.82rem;">Festlige indslag er meget velkomne — taler holdes til max 10 minutter.</p>
+      <p style="margin-top:.5rem; font-size:.82rem;" class="t"
+         data-da="Festlige indslag er meget velkomne — taler holdes til max 10 minutter."
+         data-en="Speeches and performances are very welcome — please keep them to a maximum of 10 minutes."></p>
     </div>
 
     <div class="card reveal">
       <span class="card-icon">🚗</span>
-      <h3>Transport</h3>
-      <p>Der er parkering ved både kirken og forsamlingshuset.</p>
-      <p style="margin-top:.5rem; font-size:.82rem;">Husk at planlægge hjemtransport, hvis du vil nyde en drink eller to 🍷</p>
+      <h3 class="t" data-da="Transport" data-en="Getting There"></h3>
+      <p class="t"
+         data-da="Der er parkering ved både kirken og forsamlingshuset."
+         data-en="Parking is available at both the church and the reception venue."></p>
+      <p style="margin-top:.5rem; font-size:.82rem;" class="t"
+         data-da="Husk at planlægge hjemtransport, hvis du vil nyde en drink eller to 🍷"
+         data-en="Please plan your journey home in advance if you'd like to enjoy a drink or two 🍷"></p>
     </div>
 
     <div class="card reveal">
       <span class="card-icon">🌿</span>
-      <h3>Mad og allergier</h3>
-      <p>Der serveres middag ved festen. Har du allergier eller særlige kosthensyn, bedes du oplyse det ved tilmelding.</p>
+      <h3 class="t" data-da="Mad og allergier" data-en="Food &amp; Dietary Needs"></h3>
+      <p class="t"
+         data-da="Der serveres middag ved festen. Har du allergier eller særlige kosthensyn, bedes du oplyse det ved tilmelding."
+         data-en="Dinner will be served at the reception. Please let us know about any allergies or dietary requirements when you RSVP."></p>
     </div>
 
     <div class="card reveal">
       <span class="card-icon">✉️</span>
-      <h3>Kontakt</h3>
-      <p>Spørgsmål? Skriv til os:</p>
+      <h3 class="t" data-da="Kontakt" data-en="Contact"></h3>
+      <p class="t" data-da="Spørgsmål? Skriv til os:" data-en="Questions? Get in touch:"></p>
       <p style="margin-top:.4rem;"><a href="mailto:revsbechbjoerndal@gmail.com">revsbechbjoerndal@gmail.com</a></p>
     </div>
 
@@ -584,115 +501,174 @@
 
 <div class="divider-row reveal"><span class="divider-icon">🎃</span></div>
 
-<!-- ── PROGRAM ───────────────────────────────────────────── -->
+<!-- ── PROGRAM ────────────────────────────────────────────── -->
 <section class="section" id="program">
-  <p class="section-tag reveal">Dagen</p>
-  <h2 class="section-title reveal"><em>Programmet</em></h2>
-  <p class="section-lead reveal">En guide til dagen — der vil selvfølgelig være tid til hygge og snak hele vejen igennem.</p>
+  <p class="section-tag reveal t" data-da="Dagen" data-en="The day"></p>
+  <h2 class="section-title reveal"><em class="t" data-da="Programmet" data-en="The Schedule"></em></h2>
+  <p class="section-lead reveal t"
+     data-da="En guide til dagen — der vil selvfølgelig være tid til hygge og snak hele vejen igennem."
+     data-en="A guide to the day — there'll be plenty of time for mingling and celebration at every step."></p>
 
   <div>
-
     <div class="tl-row reveal">
-      <div class="tl-time">14:15</div>
+      <div class="tl-time t" data-da="14:15" data-en="2:15 PM"></div>
       <div class="tl-center"><div class="tl-dot"></div><div class="tl-stem"></div></div>
       <div class="tl-body">
-        <h4>Gæster ankommer til kirken</h4>
-        <p>Vi beder jer være på plads inden kl. 14.30, så vi kan begynde til tiden.</p>
+        <h4 class="t" data-da="Gæster ankommer til kirken" data-en="Guests Arrive at the Church"></h4>
+        <p class="t"
+           data-da="Vi beder jer være på plads inden kl. 14.30, så vi kan begynde til tiden."
+           data-en="Please be seated by 2:25 PM so we can begin on time."></p>
       </div>
     </div>
 
     <div class="tl-row reveal">
-      <div class="tl-time">14:30</div>
+      <div class="tl-time t" data-da="14:30" data-en="2:30 PM"></div>
       <div class="tl-center"><div class="tl-dot"></div><div class="tl-stem"></div></div>
       <div class="tl-body">
-        <h4>Velsignelse — Middelfart Kirke</h4>
-        <p>Ceremonien finder sted i kirken. Forbered et par tårer 🍂</p>
+        <h4 class="t" data-da="Velsignelse — Middelfart Kirke" data-en="Ceremony — Middelfart Kirke"></h4>
+        <p class="t"
+           data-da="Ceremonien finder sted i kirken. Forbered et par tårer 🍂"
+           data-en="The wedding ceremony takes place in the church. Bring a tissue — it's going to be beautiful 🍂"></p>
       </div>
     </div>
 
     <div class="tl-row reveal">
-      <div class="tl-time">Efter vielsen</div>
+      <div class="tl-time t" data-da="Efter vielsen" data-en="After ceremony"></div>
       <div class="tl-center"><div class="tl-dot"></div><div class="tl-stem"></div></div>
       <div class="tl-body">
-        <h4>Reception — Gamborg Forsamlingshus</h4>
-        <p>Brus og velkomst ved forsamlingshuset. Køretid fra kirken er ca. 15 minutter.</p>
+        <h4 class="t" data-da="Reception — Gamborg Forsamlingshus" data-en="Reception — Gamborg Forsamlingshus"></h4>
+        <p class="t"
+           data-da="Brus og velkomst ved forsamlingshuset. Køretid fra kirken er ca. 15 minutter."
+           data-en="Bubbles and a warm welcome at the venue. The drive from the church takes around 15 minutes."></p>
       </div>
     </div>
 
     <div class="tl-row reveal">
-      <div class="tl-time">Middag</div>
+      <div class="tl-time t" data-da="Middag" data-en="Dinner"></div>
       <div class="tl-center"><div class="tl-dot"></div><div class="tl-stem"></div></div>
       <div class="tl-body">
-        <h4>Middag og taler</h4>
-        <p>Festlig middag, taler og fællessang. Indslag koordineres med toastmaster Casper.</p>
+        <h4 class="t" data-da="Middag og taler" data-en="Dinner &amp; Speeches"></h4>
+        <p class="t"
+           data-da="Festlig middag, taler og fællessang. Indslag koordineres med toastmaster Casper."
+           data-en="A festive dinner with speeches and songs. Performances are coordinated through toastmaster Casper."></p>
       </div>
     </div>
 
     <div class="tl-row reveal">
-      <div class="tl-time">Sen aften</div>
+      <div class="tl-time t" data-da="Sen aften" data-en="Late evening"></div>
       <div class="tl-center"><div class="tl-dot"></div><div class="tl-stem"></div></div>
       <div class="tl-body">
-        <h4>Dans og fest</h4>
-        <p>Vi fejrer videre ind i oktobernatten 🎃🍂</p>
+        <h4 class="t" data-da="Dans og fest" data-en="Dancing &amp; Celebration"></h4>
+        <p class="t"
+           data-da="Vi fejrer videre ind i oktobernatten 🎃🍂"
+           data-en="We'll celebrate on into the October night 🎃🍂"></p>
       </div>
     </div>
-
   </div>
 </section>
 
 <div class="divider-row reveal"><span class="divider-icon">🍁</span></div>
 
-<!-- ── FAQ ──────────────────────────────────────────────── -->
+<!-- ── FAQ ───────────────────────────────────────────────── -->
 <section class="section" id="faq">
-  <p class="section-tag reveal">Spørgsmål &amp; svar</p>
-  <h2 class="section-title reveal">Ofte stillede <em>spørgsmål</em></h2>
-  <p class="section-lead reveal">Kan du ikke finde svar herunder? Skriv til os — vi svarer gerne!</p>
+  <p class="section-tag reveal t" data-da="Spørgsmål &amp; svar" data-en="Questions &amp; Answers"></p>
+  <h2 class="section-title reveal">
+    <span class="t" data-da="Ofte stillede " data-en="Frequently "></span><em class="t" data-da="spørgsmål" data-en="Asked Questions"></em>
+  </h2>
+  <p class="section-lead reveal t"
+     data-da="Kan du ikke finde svar herunder? Skriv til os — vi svarer gerne!"
+     data-en="Can't find what you're looking for? Drop us an email and we'll get back to you."></p>
 
   <div>
 
     <details class="reveal">
-      <summary>Hvornår skal jeg svare?<span class="faq-plus">+</span></summary>
-      <p class="faq-body">Vi beder dig svare <strong>senest den 1. juli 2026</strong> til <a href="mailto:revsbechbjoerndal@gmail.com">revsbechbjoerndal@gmail.com</a>. Husk også at oplyse eventuelle allergier eller særlige kosthensyn.</p>
+      <summary>
+        <span class="t" data-da="Hvornår skal jeg svare?" data-en="When do I need to RSVP by?"></span>
+        <span class="faq-plus">+</span>
+      </summary>
+      <p class="faq-body t"
+         data-da="Vi beder dig svare <strong>senest den 1. juli 2026</strong> til <a href='mailto:revsbechbjoerndal@gmail.com'>revsbechbjoerndal@gmail.com</a>. Husk også at oplyse eventuelle allergier eller særlige kosthensyn."
+         data-en="Please reply <strong>by 1st July 2026</strong> to <a href='mailto:revsbechbjoerndal@gmail.com'>revsbechbjoerndal@gmail.com</a>. Don't forget to mention any allergies or dietary requirements."></p>
     </details>
 
     <details class="reveal">
-      <summary>Har du kosthensyn eller allergier?<span class="faq-plus">+</span></summary>
-      <p class="faq-body">Skriv gerne dine allergier og særlige kosthensyn i din tilmelding, så sørger vi for at der er noget godt til alle.</p>
+      <summary>
+        <span class="t" data-da="Har du kosthensyn eller allergier?" data-en="Do you cater for dietary requirements?"></span>
+        <span class="faq-plus">+</span>
+      </summary>
+      <p class="faq-body t"
+         data-da="Skriv gerne dine allergier og særlige kosthensyn i din tilmelding, så sørger vi for at der er noget godt til alle."
+         data-en="Please include any allergies or dietary requirements when you RSVP, and we'll make sure there's something wonderful for everyone at the table."></p>
     </details>
 
     <details class="reveal">
-      <summary>Må jeg holde en tale?<span class="faq-plus">+</span></summary>
-      <p class="faq-body">Absolut — festlige indslag er meget velkomne! Kontakt toastmaster <strong>Casper Nielsen</strong> på <a href="mailto:caspernielsen94@gmail.com">caspernielsen94@gmail.com</a> for at koordinere. Taler holdes til max 10 minutter.</p>
+      <summary>
+        <span class="t" data-da="Må jeg holde en tale?" data-en="Can I give a speech or perform?"></span>
+        <span class="faq-plus">+</span>
+      </summary>
+      <p class="faq-body t"
+         data-da="Absolut — festlige indslag er meget velkomne! Kontakt toastmaster <strong>Casper Nielsen</strong> på <a href='mailto:caspernielsen94@gmail.com'>caspernielsen94@gmail.com</a> for at koordinere. Taler holdes til max 10 minutter."
+         data-en="Yes, we'd love that! Please get in touch with toastmaster <strong>Casper Nielsen</strong> at <a href='mailto:caspernielsen94@gmail.com'>caspernielsen94@gmail.com</a> to coordinate. Speeches are kindly kept to a maximum of 10 minutes."></p>
     </details>
 
     <details class="reveal">
-      <summary>Er der parkering ved kirken og forsamlingshuset?<span class="faq-plus">+</span></summary>
-      <p class="faq-body">Ja, der er parkeringsmuligheder ved begge steder. Husk at planlægge hjemtransport i god tid, hvis du regner med at drikke.</p>
+      <summary>
+        <span class="t" data-da="Er der parkering ved kirken og forsamlingshuset?" data-en="Is there parking at both venues?"></span>
+        <span class="faq-plus">+</span>
+      </summary>
+      <p class="faq-body t"
+         data-da="Ja, der er parkeringsmuligheder ved begge steder. Husk at planlægge hjemtransport i god tid, hvis du regner med at drikke."
+         data-en="Yes, parking is available at both the church and the reception venue. If you're planning to drink, please arrange a taxi or designated driver in advance."></p>
     </details>
 
     <details class="reveal">
-      <summary>Hvad giver man i bryllupsgave?<span class="faq-plus">+</span></summary>
-      <p class="faq-body">Se vores <a href="https://onskeskyen.dk/s/em94fz" target="_blank">ønskeliste på Ønskeskyen →</a> — den opdateres løbende. Din tilstedeværelse er dog den største gave!</p>
+      <summary>
+        <span class="t" data-da="Hvad giver man i bryllupsgave?" data-en="What should I give as a wedding gift?"></span>
+        <span class="faq-plus">+</span>
+      </summary>
+      <p class="faq-body t"
+         data-da="Se vores <a href='https://onskeskyen.dk/s/em94fz' target='_blank'>ønskeliste på Ønskeskyen →</a> — den opdateres løbende. Din tilstedeværelse er den største gave!"
+         data-en="Your presence is the greatest gift we could ask for. If you'd like to give something, you're welcome to browse our <a href='https://onskeskyen.dk/s/em94fz' target='_blank'>wish list on Ønskeskyen →</a> — it's updated regularly."></p>
     </details>
 
     <details class="reveal">
-      <summary>Kan jeg tage billeder under ceremonien?<span class="faq-plus">+</span></summary>
-      <p class="faq-body">Vi vil sætte pris på, at du lægger telefonen til side under selve velsignelsen, så alle kan være fuldt til stede. Til receptionen og festen er der fri kameraleg 📸</p>
+      <summary>
+        <span class="t" data-da="Kan jeg tage billeder under ceremonien?" data-en="Can I take photos during the ceremony?"></span>
+        <span class="faq-plus">+</span>
+      </summary>
+      <p class="faq-body t"
+         data-da="Vi vil sætte pris på, at du lægger telefonen til side under selve velsignelsen, så alle kan være fuldt til stede. Til receptionen og festen er der fri kameraleg 📸"
+         data-en="We'd love for everyone to put their phones away during the ceremony so you can be fully present with us. After the ceremony, cameras are very welcome 📸"></p>
     </details>
 
     <details class="reveal">
-      <summary>Er der overnatningsmuligheder i nærheden?<span class="faq-plus">+</span></summary>
-      <p class="faq-body">Der er flere hoteller og B&amp;B'er i Middelfart og omegn. Vi anbefaler at booke i god tid — en oktoberlørdag er populær!</p>
+      <summary>
+        <span class="t" data-da="Er der overnatningsmuligheder i nærheden?" data-en="Are there hotels nearby?"></span>
+        <span class="faq-plus">+</span>
+      </summary>
+      <p class="faq-body t"
+         data-da="Der er flere hoteller og B&amp;B'er i Middelfart og omegn. Vi anbefaler at booke i god tid — en oktoberlørdag er populær!"
+         data-en="There are several hotels and B&amp;Bs in Middelfart and the surrounding area. We'd recommend booking early — an October Saturday fills up fast!"></p>
     </details>
 
     <details class="reveal">
-      <summary>Er der en dresscode?<span class="faq-plus">+</span></summary>
-      <p class="faq-body">Vi har ikke en fast dresscode — klæd dig på som til en festlig lejlighed. Høstfarver og oktoberstemning er meget velkomne 🍂 Undgå venligst hvid eller hvid-lignende farver, så bruden kan skinne!</p>
+      <summary>
+        <span class="t" data-da="Er der en dresscode?" data-en="Is there a dress code?"></span>
+        <span class="faq-plus">+</span>
+      </summary>
+      <p class="faq-body t"
+         data-da="Vi har ikke en fast dresscode — klæd dig på som til en festlig lejlighed. Høstfarver og oktoberstemning er meget velkomne 🍂 Undgå venligst hvid eller hvid-lignende farver, så bruden kan skinne!"
+         data-en="No strict dress code — come dressed for a festive occasion. Autumn tones and harvest-season colours are very welcome 🍂 We kindly ask guests to avoid white or ivory shades so the bride can shine!"></p>
     </details>
 
     <details class="reveal">
-      <summary>Er lokalet tilgængeligt for gangbesværede?<span class="faq-plus">+</span></summary>
-      <p class="faq-body">Kontakt os gerne, så vi kan sikre at alle har en god oplevelse. Skriv til <a href="mailto:revsbechbjoerndal@gmail.com">revsbechbjoerndal@gmail.com</a> med dine behov.</p>
+      <summary>
+        <span class="t" data-da="Er lokalet tilgængeligt for gangbesværede?" data-en="Is the venue accessible?"></span>
+        <span class="faq-plus">+</span>
+      </summary>
+      <p class="faq-body t"
+         data-da="Kontakt os gerne, så vi kan sikre at alle har en god oplevelse. Skriv til <a href='mailto:revsbechbjoerndal@gmail.com'>revsbechbjoerndal@gmail.com</a> med dine behov."
+         data-en="Please get in touch and we'll do our best to ensure everyone has a wonderful experience. Write to us at <a href='mailto:revsbechbjoerndal@gmail.com'>revsbechbjoerndal@gmail.com</a> with your needs."></p>
     </details>
 
   </div>
@@ -700,47 +676,100 @@
 
 <div class="divider-row reveal"><span class="divider-icon">🎃</span></div>
 
-<!-- ── ØNSKELISTE ─────────────────────────────────────── -->
+<!-- ── ØNSKELISTE / WISH LIST ─────────────────────────────── -->
 <section class="section" id="onskeliste">
-  <p class="section-tag reveal">Gaver</p>
-  <h2 class="section-title reveal"><em>Ønskeliste</em></h2>
-  <p class="section-lead reveal">Din tilstedeværelse er den bedste gave — men hvis du ønsker at give noget, har vi lavet en liste.</p>
+  <p class="section-tag reveal t" data-da="Gaver" data-en="Gifts"></p>
+  <h2 class="section-title reveal"><em class="t" data-da="Ønskeliste" data-en="Our Wish List"></em></h2>
+  <p class="section-lead reveal t"
+     data-da="Din tilstedeværelse er den bedste gave — men hvis du ønsker at give noget, har vi lavet en liste."
+     data-en="Your presence is the best gift we could ask for — but if you'd like to give something, here's our list."></p>
 
   <div class="card reveal" style="max-width:420px; text-align:center; margin:0 auto; padding:2.5rem 2rem;">
     <span class="card-icon" style="font-size:2rem;">🌰</span>
     <h3 style="margin-bottom:.7rem;">Ønskeskyen</h3>
-    <p style="margin-bottom:1.5rem;">Vi har samlet vores ønsker på Ønskeskyen. Listen opdateres løbende frem mod brylluppet.</p>
-    <a href="https://onskeskyen.dk/s/em94fz" target="_blank" class="btn" style="font-size:.72rem;">Se ønskelisten →</a>
+    <p style="margin-bottom:1.5rem;" class="t"
+       data-da="Vi har samlet vores ønsker på Ønskeskyen. Listen opdateres løbende frem mod brylluppet."
+       data-en="We've gathered our wishes on Ønskeskyen (a Danish gift registry). The list is updated regularly in the lead-up to the wedding."></p>
+    <a href="https://onskeskyen.dk/s/em94fz" target="_blank" class="btn t" style="font-size:.72rem;"
+       data-da="Se ønskelisten →" data-en="View our wish list →"></a>
   </div>
 </section>
 
 <div class="divider-row reveal"><span class="divider-icon">🍁</span></div>
 
-<!-- ── SVAR ───────────────────────────────────────────── -->
+<!-- ── SVAR / RSVP ────────────────────────────────────────── -->
 <section class="section" id="svar">
   <div class="rsvp-box reveal">
-    <p class="section-tag">Svar udbedes</p>
-    <h2 class="section-title">Giv os besked<br/><em>inden 1. juli 2026</em></h2>
-    <p>Send os en mail med dit svar — og glem ikke at nævne eventuelle allergier eller særlige kosthensyn.</p>
-    <a href="mailto:revsbechbjoerndal@gmail.com?subject=Svar%20p%C3%A5%20bryllupsinvitation" class="btn">Send dit svar</a>
+    <p class="section-tag t" data-da="Svar udbedes" data-en="RSVP"></p>
+    <h2 class="section-title">
+      <span class="t" data-da="Giv os besked inden" data-en="Please reply by"></span><br/>
+      <em class="t" data-da="1. juli 2026" data-en="1st July 2026"></em>
+    </h2>
+    <p class="t"
+       data-da="Send os en mail med dit svar — og glem ikke at nævne eventuelle allergier eller særlige kosthensyn."
+       data-en="Send us an email with your reply — and don't forget to mention any allergies or dietary requirements."></p>
+    <a href="mailto:revsbechbjoerndal@gmail.com?subject=Svar%20p%C3%A5%20bryllupsinvitation" class="btn t"
+       data-da="Send dit svar" data-en="Send your RSVP"></a>
   </div>
 </section>
 
-<!-- ── FOOTER ─────────────────────────────────────────── -->
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
 <footer>
-  <p>🍂 Kærlig hilsen Nichlas &amp; Malene &nbsp;·&nbsp; Lørdag den 10. oktober 2026 🍂</p>
+  <p class="t"
+     data-da="🍂 Kærlig hilsen Nichlas &amp; Malene &nbsp;·&nbsp; Lørdag den 10. oktober 2026 🍂"
+     data-en="🍂 With love, Nichlas &amp; Malene &nbsp;·&nbsp; Saturday, 10th October 2026 🍂"></p>
 </footer>
 
 <script>
+  // ── LANGUAGE TOGGLE ──────────────────────────────────────
+  const STORAGE_KEY = 'nm-wedding-lang';
+  let currentLang = localStorage.getItem(STORAGE_KEY) || 'da';
+
+  function setLang(lang) {
+    if (lang === currentLang) return;
+    currentLang = lang;
+    localStorage.setItem(STORAGE_KEY, lang);
+
+    // Fade out
+    document.body.classList.add('switching');
+
+    setTimeout(() => {
+      applyLang(lang);
+      document.body.classList.remove('switching');
+    }, 200);
+  }
+
+  function applyLang(lang) {
+    document.documentElement.lang = lang;
+
+    // Swap all translatable text nodes
+    document.querySelectorAll('.t').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) el.innerHTML = val;
+    });
+
+    // Update page title
+    document.title = lang === 'da'
+      ? 'Nichlas & Malene — 10. oktober 2026'
+      : 'Nichlas & Malene — 10 October 2026';
+
+    // Update button states
+    document.getElementById('btn-da').classList.toggle('active', lang === 'da');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  }
+
+  // Apply on load
+  applyLang(currentLang);
+
+  // ── SCROLL REVEAL ─────────────────────────────────────────
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.reveal').forEach((el, i) => {
-    const parent = el.parentElement;
-    const siblings = [...parent.querySelectorAll(':scope > .reveal')];
+  document.querySelectorAll('.reveal').forEach(el => {
+    const siblings = [...el.parentElement.querySelectorAll(':scope > .reveal')];
     const idx = siblings.indexOf(el);
     if (idx > 0) el.style.transitionDelay = `${idx * 80}ms`;
     io.observe(el);
